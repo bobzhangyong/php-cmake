@@ -15,21 +15,18 @@ project(pcre C)
 option(pcre "Enable pcre support" ON)
 option(pcre-shared "Shared pcre" OFF)
 
+
 ## Check if user provided --with-pcre-regex
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/pcrelib")
 
-set(PCRELIB_SOURCES pcrelib/pcre_chartables.c pcrelib/pcre_ucd.c 
-pcrelib/pcre_compile.c pcrelib/pcre_config.c pcrelib/pcre_exec.c
-pcrelib/pcre_fullinfo.c pcrelib/pcre_get.c pcrelib/pcre_globals.c
-pcrelib/pcre_info.c pcrelib/pcre_maketables.c pcrelib/pcre_newline.c
-pcrelib/pcre_ord2utf8.c pcrelib/pcre_refcount.c pcrelib/pcre_study.c
-pcrelib/pcre_tables.c pcrelib/pcre_try_flipped.c pcrelib/pcre_valid_utf8.c
-pcrelib/pcre_version.c pcrelib/pcre_xclass.c)
+file(GLOB PCRELIB_SOURCES "pcrelib/*.c")
+list(REMOVE_ITEM PCRELIB_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/pcrelib/dftables.c")
 
-set(EXT_PCRE_SOURCES
-  php_pcre.c
-)
+set(EXT_PCRE_SOURCES php_pcre.c)
 
 #add_library(EXT_XML [STATIC | SHARED | MODULE] [EXCLUDE_FROM_ALL]
 add_library(EXT_PCRE STATIC ${PCRELIB_SOURCES} ${EXT_PCRE_SOURCES})
+set_target_properties(EXT_PCRE
+        PROPERTIES COMPILE_FLAGS "-DHAVE_CONFIG_H -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1"
+        )
 ##target_link_libraries(EXT_PCRE ${@@EXTENSION_LIBRARIES@@})

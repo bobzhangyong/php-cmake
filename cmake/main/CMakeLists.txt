@@ -34,81 +34,87 @@ configure_file(internal_functions.c.in ${CMAKE_CURRENT_SOURCE_DIR}/internal_func
 
 # ########## main library ##########
 # Sources:
-set(main_library_SRCS
-    internal_functions.c
-    internal_functions_cli.c
-#    internal_functions_nw.c
-#    internal_functions_win32.c
-    main.c
-    snprintf.c
-    spprintf.c
-    php_sprintf.c
-    fopen_wrappers.c
-    alloca.c
-    php_scandir.c
-    php_ini.c
-    SAPI.c
-    rfc1867.c
-    php_content_types.c
-    strlcpy.c
-    strlcat.c
-    mergesort.c
-    reentrancy.c
-    php_variables.c
-    php_ticks.c
-    network.c
-    php_open_temporary_file.c
-    php_logos.c
-    output.c
-    getopt.c
 
-    streams/streams.c
-    streams/cast.c
-    streams/memory.c
-    streams/filter.c
-    streams/plain_wrapper.c
-    streams/userspace.c
-    streams/transports.c
-    streams/xp_socket.c
-    streams/mmap.c
-    streams/glob_wrapper.c
-    streams/unicode_filter.c
-)
+file(GLOB main_library_SRCS *.c streams/*.c)
+list(REMOVE_ITEM main_library_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/internal_functions_nw.c)
+list(REMOVE_ITEM main_library_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/internal_functions_win32.c)
+#file(GLOB main_library_SRCS )
+#set(main_library_SRCS
+#    internal_functions.c
+#    internal_functions_cli.c
+##    internal_functions_nw.c
+##    internal_functions_win32.c
+#    main.c
+#    snprintf.c
+#    spprintf.c
+#    php_sprintf.c
+#    fopen_wrappers.c
+#    alloca.c
+#    php_scandir.c
+#    php_ini.c
+#    SAPI.c
+#    rfc1867.c
+#    php_content_types.c
+#    strlcpy.c
+#    strlcat.c
+#    mergesort.c
+#    reentrancy.c
+#    php_variables.c
+#    php_ticks.c
+#    network.c
+#    php_open_temporary_file.c
+#    php_logos.c
+#    output.c
+#    getopt.c
+#
+#    streams/streams.c
+#    streams/cast.c
+#    streams/memory.c
+#    streams/filter.c
+#    streams/plain_wrapper.c
+#    streams/userspace.c
+#    streams/transports.c
+#    streams/xp_socket.c
+#    streams/mmap.c
+#    streams/glob_wrapper.c
+#    streams/unicode_filter.c
+#)
 
 
 # Headers:
-set(main_library_HDRS
-    build-defs.h
-    fopen_wrappers.h
-    logos.h
-    php.h
-    php_compat.h
-#    php_config.h
-    php_content_types.h
-    php_getopt.h
-    php_globals.h
-    php_ini.h
-    php_logos.h
-    php_main.h
-    php_memory_streams.h
-    php_network.h
-    php_open_temporary_file.h
-    php_output.h
-    php_reentrancy.h
-    php_scandir.h
-    php_streams.h
-    php_syslog.h
-    php_ticks.h
-    php_variables.h
-    php_version.h
-    rfc1867.h
-    SAPI.h
-    snprintf.h
-    spprintf.h
-    win95nt.h
-
-    streams/php_stream_filter_api.h
-)
+file(GLOB main_library_HDRS *.h streams/*.h)
+#set(main_library_HDRS
+#    build-defs.h
+#    fopen_wrappers.h
+#    logos.h
+#    php.h
+#    php_compat.h
+##    php_config.h
+#    php_content_types.h
+#    php_getopt.h
+#    php_globals.h
+#    php_ini.h
+#    php_logos.h
+#    php_main.h
+#    php_memory_streams.h
+#    php_network.h
+#    php_open_temporary_file.h
+#    php_output.h
+#    php_reentrancy.h
+#    php_scandir.h
+#    php_streams.h
+#    php_syslog.h
+#    php_ticks.h
+#    php_variables.h
+#    php_version.h
+#    rfc1867.h
+#    SAPI.h
+#    snprintf.h
+#    spprintf.h
+#    win95nt.h
+#
+#    streams/php_stream_filter_api.h
+#)
 
 
 # actual target:

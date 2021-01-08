@@ -27,24 +27,11 @@ INCLUDE_DIRECTORIES(${TSRM_SOURCE_DIR})
 
 # ########## TSRM executable ##########
 # Sources:
-SET(TSRM_library_SRCS
-
-  TSRM.c
-  tsrm_strtok_r.c
-  tsrm_virtual_cwd.c
-
-)
+SET(TSRM_library_SRCS TSRM.c tsrm_nw.c tsrm_strtok_r.c)
 
 # Headers:
 SET(TSRM_library_HDRS
-    acconfig.h
-    readdir.h
-    TSRM.h
-    tsrm_config.h
-    tsrm_config_common.h
-    tsrm_nw.h
-    tsrm_strtok_r.h
-    tsrm_virtual_cwd.h
+    readdir.h TSRM.h tsrm_config.h tsrm_config_common.h tsrm_nw.h tsrm_strtok_r.h
 )
 
 

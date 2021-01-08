@@ -18,20 +18,24 @@ set(RE2C_FOUND FALSE)
 find_program(RE2C_EXECUTABLE NAMES re2c DOC "path to re2c executable")
 mark_as_advanced(RE2C_EXECUTABLE)
 
+set(RE2C_EXECUTABLE "/bin/re2c")
+
 if(RE2C_EXECUTABLE)
   set(RE2C_FOUND TRUE)
   # check version
-  execute_process(COMMAND ${RE2C_EXECUTABLE} --vernum
-    RESULT_VARIABLE RE2C_version_result
-    OUTPUT_VARIABLE RE2C_version_output
-    ERROR_VARIABLE RE2C_version_error
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
-#  message("RE2C_version_result:${RE2C_version_result} RE2C_version_output:${RE2C_version_output} RE2C_version_error:${RE2C_version_error}")
-  if(RE2C_version_result EQUAL 0)
-    message(SEND_ERROR "Command \"${RE2C_EXECUTABLE} --vernum\" failed with output:\n${RE2C_version_error}")
-  else(RE2C_version_result EQUAL )
-    set(RE2C_VERNUM ${RE2C_version_output})
-  endif(RE2C_version_result EQUAL 0)
+#  execute_process(COMMAND ${RE2C_EXECUTABLE} --vernum
+#    RESULT_VARIABLE RE2C_version_result
+#    OUTPUT_VARIABLE RE2C_version_output
+#    ERROR_VARIABLE RE2C_version_error
+#    OUTPUT_STRIP_TRAILING_WHITESPACE)
+##  message("RE2C_version_result:${RE2C_version_result} RE2C_version_output:${RE2C_version_output} RE2C_version_error:${RE2C_version_error}")
+#  if(RE2C_version_result EQUAL 0)
+#    message(SEND_ERROR "Command \"${RE2C_EXECUTABLE} --vernum\" failed with output:\n${RE2C_version_error}")
+#  else(RE2C_version_result EQUAL )
+#    set(RE2C_VERNUM ${RE2C_version_output})
+#  endif(RE2C_version_result EQUAL 0)
+
+  set(RE2C_VERNUM 010300)
 
   #set call macro
   macro(RE2C_TARGET Input Output Args)

@@ -11,6 +11,8 @@ message("BEFORE cmaking of PHP ${PHP_VERSION}")
 cmake_minimum_required(VERSION 2.4.0 FATAL_ERROR)
 project(PHP C)
 
+set(CMAKE_CXX_STANDARD 11)
+
 # Don't allow in-source builds
 if(PROJECT_BINARY_DIR STREQUAL PROJECT_SOURCE_DIR)
   message(FATAL_ERROR "Please set your build dir outside your source dir and try again.")
@@ -116,12 +118,17 @@ if(UNIX)
   add_definitions(-DPHP_ATOM_INC -fvisibility=hidden)
 endif()
 
+if(COMMAND cmake_policy)
+  cmake_policy(SET CMP0003 NEW)
+endif(COMMAND cmake_policy)
+
 # Configure in main zone
 configure_file_in(php_config.h.cmake php_config.h DIRECTORY main)
 # Configure in Zend zone
 configure_file_in(zend_config.h.cmake zend_config.h DIRECTORY Zend)
 
 add_subdirectory(ext)
+
 message("extension list: ${EXTENSION_LIST}")
 
 add_subdirectory(Zend)

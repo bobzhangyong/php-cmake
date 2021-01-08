@@ -13,7 +13,7 @@ option(json-shared "Shared json" OFF)
 
 
 set(EXT_JSON_SOURCES
-  json.c utf8_to_utf16.c utf8_decode.c JSON_parser.c
+  json.c json_encoder.c json_parser.tab.c json_scanner.c
 )
 
 
