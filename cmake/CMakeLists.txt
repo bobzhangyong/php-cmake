@@ -13,6 +13,9 @@ project(PHP C)
 
 set(CMAKE_CXX_STANDARD 11)
 
+#set(CMAKE_C_FLAGS "-O0 -Wall -Wextra")
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g")
+
 # Don't allow in-source builds
 if(PROJECT_BINARY_DIR STREQUAL PROJECT_SOURCE_DIR)
   message(FATAL_ERROR "Please set your build dir outside your source dir and try again.")
@@ -76,6 +79,8 @@ set(EXPANDED_EXTENSION_DIR ${CMAKE_CURRENT_BINARY_DIR})
 set(EXPANDED_INCLUDE_PATH ${CMAKE_CURRENT_BINARY_DIR})
 set(PHP_OS "gloobOS")
 set(EXPANDED_PEAR_INSTALLDIR ${CMAKE_CURRENT_BINARY_DIR})
+set(EXPANDED_PHP_CONFIG_FILE_PATH ${CMAKE_CURRENT_BINARY_DIR})
+set(PHP_CONFIG_FILE_SCAN_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
 if(APPLE)
   set(DARWIN 1)
@@ -127,14 +132,35 @@ configure_file_in(php_config.h.cmake php_config.h DIRECTORY main)
 # Configure in Zend zone
 configure_file_in(zend_config.h.cmake zend_config.h DIRECTORY Zend)
 
+
+
+#find_package(BISON)
+
+## Regenerate always ? some options force ?
+#if(NOT EXISTS "zend_language_parser.c" OR NOT EXISTS "zend_language_parser.h" AND NOT BISON_FOUND)
+#  message(FATAL_ERROR "You need bison parser to regenerate zend_language_parser.c")
+#endif(NOT EXISTS "zend_language_parser.c" OR NOT EXISTS "zend_language_parser.h" AND NOT BISON_FOUND)
+
+#if(BISON_FOUND)
+#  message("[php-CMake]: Regenerating zend_language_parser.c")
+#  BISON_TARGET(zend ${PHP_SOURCE_DIR}/Zend/zend_language_parser.y ${PHP_SOURCE_DIR}/Zend/zend_language_parser.c COMPILE_FLAGS "-v")
+#endif(BISON_FOUND)
+
+#if (BISON_FOUND)
+#  message("[php-CMake]: Regenerating zend_ini_parser.c")
+#  BISON_TARGET(ini_ ${PHP_SOURCE_DIR}/Zend/zend_ini_parser.y ${PHP_SOURCE_DIR}/Zend/zend_ini_parser.c COMPILE_FLAGS "-v")
+#endif (BISON_FOUND)
+
+#add_library(Zend_BISON ${BISON_zend_OUTPUTS} ${BISON_ini__OUTPUTS})
+
+
+
 add_subdirectory(ext)
-
 message("extension list: ${EXTENSION_LIST}")
-
-add_subdirectory(Zend)
 
 add_subdirectory(TSRM)
 
 add_subdirectory(main)
 
+add_subdirectory(Zend)
 add_subdirectory(sapi)

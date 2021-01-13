@@ -11,15 +11,18 @@
 option(iconv "Enable iconv support" ON)
 option(iconv-shared "Shared iconv" OFF)
 
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/php_have_bsd_iconv.h)
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/php_have_glibc_iconv.h)
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/php_have_libiconv.h)
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/php_have_ibm_iconv.h)
+file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/php_have_bsd_iconv.h)
+file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/php_have_glibc_iconv.h)
+file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/php_have_libiconv.h)
+file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/php_have_iconv.h)
+file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/php_have_ibm_iconv.h)
 
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/php_have_iconv.h)
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/php_iconv_supports_errno.h)
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/php_php_iconv_impl.h)
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/php_php_iconv_h_path.h)
+file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/php_iconv_aliased_libiconv.h)
+file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/php_iconv_broken_ignore.h)
+file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/php_iconv_supports_errno.h)
+file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/php_php_iconv_h_path.h)
+file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/php_php_iconv_impl.h)
+
 
 set(HAVE_ICONV 1)
 

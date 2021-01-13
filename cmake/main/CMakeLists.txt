@@ -23,12 +23,42 @@ include_directories(${PHP_BINARY_DIR}/Zend)
 include_directories(${PHP_SOURCE_DIR}/TSRM)
 include_directories(${PHP_BINARY_DIR}/ext/date/lib)
 
-
-
 set(PHP_main_LIBRARIES)
 
-PHP_INTERNAL_FUNCTIONS("${EXTENSION_NAME_LIST}" "${EXTENSION_NAME_LIST}" ${main_BINARY_DIR}/internal_functions.c)
-PHP_INTERNAL_FUNCTIONS("${EXTENSION_NAME_LIST}" "${EXTENSION_NAME_LIST}" ${main_BINARY_DIR}/internal_functions_cli.c)
+set(EXT_NAME_LIST "date\;ext/date"
+        "libxml\;ext/libxml"
+        "pcre\;ext/pcre"
+        "sqlite3\;ext/sqlite3"
+        "ctype\;ext/ctype"
+        "dom\;ext/dom"
+        "fileinfo\;ext/fileinfo"
+        "filter\;ext/filter"
+        "hash\;ext/hash"
+        "iconv\;ext/iconv"
+        "json\;ext/json"
+        "pdo\;ext/pdo"
+        "pdo_sqlite\;ext/pdo_sqlite"
+        "phar\;ext/phar"
+        "posix\;ext/posix"
+        "reflection\;ext/reflection"
+        "session\;ext/session"
+        "simplexml\;ext/simplexml"
+        "spl\;ext/spl"
+        "standard\;ext/standard"
+        "tokenizer\;ext/tokenizer"
+        "xml\;ext/xml"
+        "xmlreader\;ext/xmlreader"
+        "xmlwriter\;ext/xmlwriter"
+        )
+
+
+PHP_INTERNAL_FUNCTIONS("${EXT_NAME_LIST}" "${EXT_NAME_LIST}" "${CMAKE_CURRENT_SOURCE_DIR}/internal_functions.c")
+PHP_INTERNAL_FUNCTIONS("${EXT_NAME_LIST}" "${EXT_NAME_LIST}" "${CMAKE_CURRENT_SOURCE_DIR}/internal_functions_cli.c")
+
+#PHP_INTERNAL_FUNCTIONS("${EXTENSION_NAME_LIST}" "${EXTENSION_NAME_LIST}" ${CMAKE_CURRENT_SOURCE_DIR}/internal_functions.c)
+#PHP_INTERNAL_FUNCTIONS("${EXTENSION_NAME_LIST}" "${EXTENSION_NAME_LIST}" ${CMAKE_CURRENT_SOURCE_DIR}/internal_functions_cli.c)
+
+message(${main_BINARY_DIR})
 
 configure_file(internal_functions.c.in ${CMAKE_CURRENT_SOURCE_DIR}/internal_functions.c)
 
@@ -119,6 +149,9 @@ file(GLOB main_library_HDRS *.h streams/*.h)
 
 # actual target:
 add_library(main ${main_library_SRCS} ${main_library_HDRS})
+set_target_properties(main
+        PROPERTIES COMPILE_FLAGS "-DZEND_ENABLE_STATIC_TSRMLS_CACHE=1"
+        )
 set_target_properties(main PROPERTIES VERSION 0.0.0)
 
 # add install target:

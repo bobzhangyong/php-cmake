@@ -20,4 +20,5 @@ set(EXT_SQLITE3_SOURCES
 
 #add_library(EXT_XML [STATIC | SHARED | MODULE] [EXCLUDE_FROM_ALL]
 add_library(EXT_SQLITE3 ${EXT_SQLITE3_SOURCES})
+target_link_libraries(EXT_SQLITE3 "pthread")
 ##target_link_libraries(EXT_SQLITE3 ${@@EXTENSION_LIBRARIES@@})
