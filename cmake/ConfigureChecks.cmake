@@ -3,7 +3,6 @@ include(CheckTypeSize)
 include(CMakeDetermineSystem)
 include(CheckFunctionExists)
 
-
 ## Check include files
 
 
@@ -368,4 +367,3 @@ check_function_exists(unsetenv HAVE_UNSETENV)
 check_function_exists(usleep HAVE_USLEEP)
 check_function_exists(vasprintf HAVE_VASPRINTF)
 check_function_exists(vsnprintf HAVE_VSNPRINTF)
-

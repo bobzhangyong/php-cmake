@@ -62,16 +62,16 @@ if(NOT EXISTS "zend_language_parser.c" OR NOT EXISTS "zend_language_parser.h" AN
 endif(NOT EXISTS "zend_language_parser.c" OR NOT EXISTS "zend_language_parser.h" AND NOT BISON_FOUND)
 
 if(BISON_FOUND)
-  message("[php-CMake]: Regenerating zend_language_parser.c")
-  # yacc -p zend -v -d ./zend_language_parser.y -o zend_language_parser.c
-  # bison -p zend -v -d zend_language_parser.y -o zend_language_parser.c
-  BISON_TARGET(zend ${Zend_SOURCE_DIR}/zend_language_parser.y ${Zend_SOURCE_DIR}/zend_language_parser.c COMPILE_FLAGS "-v")
+	message("[php-CMake]: Regenerating zend_language_parser.c")
+	# yacc -p zend -v -d ./zend_language_parser.y -o zend_language_parser.c
+	# bison -p zend -v -d zend_language_parser.y -o zend_language_parser.c
+	BISON_TARGET(zend ${Zend_SOURCE_DIR}/zend_language_parser.y ${Zend_SOURCE_DIR}/zend_language_parser.c COMPILE_FLAGS "-v")
 endif(BISON_FOUND)
 
 # INI parser/scanner rules
 if (BISON_FOUND)
-  message("[php-CMake]: Regenerating zend_ini_parser.c")
-  BISON_TARGET(ini_ ${Zend_SOURCE_DIR}/zend_ini_parser.y ${Zend_SOURCE_DIR}/zend_ini_parser.c COMPILE_FLAGS "-v")
+	message("[php-CMake]: Regenerating zend_ini_parser.c")
+	BISON_TARGET(ini_ ${Zend_SOURCE_DIR}/zend_ini_parser.y ${Zend_SOURCE_DIR}/zend_ini_parser.c COMPILE_FLAGS "-v")
 endif (BISON_FOUND)
 
 find_file(ZEND_INI_SCANNER "zend_ini_scanner.c" PATHS ${Zend_SOURCE_DIR})
@@ -81,7 +81,9 @@ if(NOT ZEND_INI_SCANNER)
 endif(NOT ZEND_INI_SCANNER)
 
 #set(PHP_ZEND_OBJECTS ${Zend_BINARY_DIR}/CMakeFiles/Zend.dir/zend_ini_parser.o ${Zend_BINARY_DIR}/CMakeFiles/Zend.dir/zend_default_classes.o PARENT_SCOPE)
+#set(PHP_ZEND_SOURCES ${Zend_SOURCE_DIR}/zend_ini_parser.c ${Zend_SOURCE_DIR}/zend_default_classes.c PARENT_SCOPE)
 set(PHP_ZEND_SOURCES ${Zend_SOURCE_DIR}/zend_ini_parser.c ${Zend_SOURCE_DIR}/zend_default_classes.c PARENT_SCOPE)
+
 
 # Linux sources...
 
@@ -89,118 +91,12 @@ set(PHP_ZEND_SOURCES ${Zend_SOURCE_DIR}/zend_ini_parser.c ${Zend_SOURCE_DIR}/zen
 # Sources:
 
 file(GLOB Zend_library_SRCS "${Zend_SOURCE_DIR}/*.c")
-#set(Zend_library_SRCS
-#
-#  zend_alloc.c
-#  zend_compile.c
-#  zend_closures.c
-#  zend_constants.c
-#  zend_dynamic_array.c
-#  zend_execute.c
-#  zend_execute_API.c
-#  zend_highlight.c
-#  zend_llist.c
-#  zend_opcode.c
-#  zend_operators.c
-#  zend_ptr_stack.c
-#  zend_stack.c
-#  zend_variables.c
-#  zend.c
-#  zend_API.c
-#  zend_extensions.c
-#  zend_hash.c
-#  zend_list.c
-#  zend_indent.c
-#  zend_builtin_functions.c
-#  zend_sprintf.c
-#  zend_ini.c
-#  zend_qsort.c
-#  zend_objects.c
-#  zend_object_handlers.c
-#  zend_objects_API.c
-#  zend_ts_hash.c
-#  zend_stream.c
-##  zend_default_classes.c
-#  zend_iterators.c
-#  zend_interfaces.c
-#  zend_exceptions.c
-#  zend_strtod.c
-#  zend_gc.c
-#  zend_unicode.c
-#  zend_strtol.c
-#
-#  zend_language_scanner.c
-#  zend_ini_scanner.c
-##  zend_language_parser.c
-##  zend_ini_parser.c
-#)
 
 # Headers:
 file(GLOB Zend_library_HDRS "${Zend_SOURCE_DIR}/*.h")
-#set(Zend_library_HDRS
-#    acconfig.h
-#    zend.h
-#    zend_alloc.h
-#    zend_API.h
-#    zend_builtin_functions.h
-#    zend_closures.h
-#    zend_compile.h
-#    zend_config.nw.h
-#    zend_config.w32.h
-#    zend_constants.h
-#    zend_dynamic_array.h
-#    zend_errors.h
-#    zend_exceptions.h
-#    zend_execute.h
-#    zend_extensions.h
-#    zend_fast_cache.h
-#    zend_gc.h
-#    zend_globals.h
-#    zend_globals_macros.h
-#    zend_hash.h
-#    zend_highlight.h
-#    zend_indent.h
-#    zend_ini.h
-#    zend_ini_scanner.h
-#    zend_ini_scanner_defs.h
-#    zend_interfaces.h
-#    zend_istdiostream.h
-#    zend_iterators.h
-#    zend_language_scanner.h
-#    zend_language_scanner_defs.h
-#    zend_list.h
-#    zend_llist.h
-#    zend_modules.h
-#    zend_multiply.h
-#    zend_object_handlers.h
-#    zend_objects.h
-#    zend_objects_API.h
-#    zend_operators.h
-#    zend_ptr_stack.h
-#    zend_qsort.h
-#    zend_stack.h
-#    zend_static_allocator.h
-#    zend_stream.h
-#    zend_strtod.h
-#    zend_ts_hash.h
-#    zend_types.h
-#    zend_variables.h
-#    zend_vm.h
-#    zend_vm_def.h
-#    zend_vm_execute.h
-#    zend_vm_opcodes.h
-#    zend_unicode.h
-#)
 
 # actual target:
-
-
-# actual target:
-add_library(Zend ${Zend_library_SRCS} ${Zend_library_HDRS})
-target_link_libraries(Zend "dl")
-target_link_libraries(Zend "m")
-set_target_properties(Zend PROPERTIES VERSION 0.0.0)
-
+add_library(Zend ${Zend_library_SRCS} ${Zend_library_HDRS} ${BISON_zend_OUTPUTS} ${BISON_ini__OUTPUTS})
 set_target_properties(Zend PROPERTIES VERSION 0.0.0)
 
 # add install target:

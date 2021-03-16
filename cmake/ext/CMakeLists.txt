@@ -14,8 +14,37 @@ include_directories(${PHP_BINARY_DIR}/Zend)
 
 set(EXTENSION_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-file(GLOB_RECURSE EXTENSION_MODULES . CMakeLists.txt)
-list(REMOVE_ITEM EXTENSION_MODULES ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt)
+#file(GLOB_RECURSE EXTENSION_MODULES . CMakeLists.txt)
+#list(REMOVE_ITEM EXTENSION_MODULES ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt)
+
+
+set(EXTENSION_MODULES "date"
+        "libxml"
+        "pcre"
+        "sqlite3"
+        "ctype"
+        "dom"
+        "fileinfo"
+        "filter"
+        "hash"
+        "iconv"
+        "json"
+#        "opcache"
+        "pdo"
+        "pdo_sqlite"
+        "phar"
+        "posix"
+        "reflection"
+        "session"
+        "simplexml"
+        "spl"
+        "standard"
+        "tokenizer"
+        "xml"
+        "xmlreader"
+        "xmlwriter"
+        )
+
 
 foreach(MODULE ${EXTENSION_MODULES})
   string(REPLACE ${CMAKE_CURRENT_SOURCE_DIR}/ "" MODULE_NAME ${MODULE})
@@ -27,7 +56,7 @@ foreach(MODULE ${EXTENSION_MODULES})
 #    include(${MODULE})
     string(TOUPPER "EXT_${MODULE_NAME}" EXTENSION_TARGET)
     set(EXTENSION_LIST ${EXTENSION_TARGET} ${EXTENSION_LIST})
-	set(EXTENSION_NAME_LIST ${MODULE_NAME} ${EXTENSION_NAME_LIST})
+	set(EXTENSION_FOR_GENIF "${MODULE_NAME}\\\;ext/${MODULE_NAME}" ${EXTENSION_FOR_GENIF})
 
 #  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/${MODULE_NAME})
 #  include_directories(${CMAKE_CURRENT_BINARY_DIR}/${MODULE_NAME})
@@ -37,4 +66,4 @@ foreach(MODULE ${EXTENSION_MODULES})
 endforeach(MODULE)
 
 set(EXTENSION_LIST ${EXTENSION_LIST} PARENT_SCOPE)
-set(EXTENSION_NAME_LIST ${EXTENSION_NAME_LIST} PARENT_SCOPE)
+set(EXTENSION_FOR_GENIF ${EXTENSION_FOR_GENIF} PARENT_SCOPE)
