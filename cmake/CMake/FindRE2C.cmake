@@ -1,4 +1,4 @@
-  
+
 # - Try to find re2c
 # Once done this will define
 #
@@ -23,11 +23,11 @@ if(RE2C_EXECUTABLE)
   set(RE2C_FOUND TRUE)
   # check version
   execute_process(COMMAND ${RE2C_EXECUTABLE} --vernum
-    RESULT_VARIABLE RE2C_version_result
-    OUTPUT_VARIABLE RE2C_version_output
-    ERROR_VARIABLE RE2C_version_error
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
-#  message("RE2C_version_result:${RE2C_version_result} RE2C_version_output:${RE2C_version_output} RE2C_version_error:${RE2C_version_error}")
+          RESULT_VARIABLE RE2C_version_result
+          OUTPUT_VARIABLE RE2C_version_output
+          ERROR_VARIABLE RE2C_version_error
+          OUTPUT_STRIP_TRAILING_WHITESPACE)
+  #  message("RE2C_version_result:${RE2C_version_result} RE2C_version_output:${RE2C_version_output} RE2C_version_error:${RE2C_version_error}")
   if(RE2C_version_result EQUAL 0)
     message(SEND_ERROR "Command \"${RE2C_EXECUTABLE} --vernum\" failed with output:\n${RE2C_version_error}")
   else(RE2C_version_result EQUAL )
@@ -35,14 +35,15 @@ if(RE2C_EXECUTABLE)
   endif(RE2C_version_result EQUAL 0)
 
   #set call macro
-  macro(RE2C_TARGET Input Output Args)
+  macro(RE2C_TARGET Name Input Output Workdir Arg1 Arg2 Arg3)
     set(RE2C_EXECUTABLE_opts ${Args})
+    #TODO I don't know how to send "-no-generation-date --case-inverted -cbdFt" by param, if you know please fix it
     add_custom_command(OUTPUT ${Output}
-      COMMMAND ${RE2C_EXECUTABLE} ${RE2C_EXECUTABLE_opts} -o${Output} ${Input}
-#      DEPENDS ${Input}
-      COMMENT "[RE2C] Building re2c scanner with ${RE2C_EXECUTABLE} ${RE2C_VERSION}"
-      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+            COMMAND ${RE2C_EXECUTABLE} --no-generation-date ${Arg1} ${Arg2} ${Arg3} -o${Output} ${Input}
+            COMMENT "[RE2C] Building re2c scanner with ${RE2C_EXECUTABLE} ${RE2C_VERSION}"
+            WORKING_DIRECTORY ${Workdir})
     message("${RE2C_EXECUTABLE} ${RE2C_EXECUTABLE_opts} -o${Output} ${Input}")
+    SET(RE2C_${Name}_OUTPUT ${Output})
   endmacro(RE2C_TARGET)
 endif(RE2C_EXECUTABLE)
 

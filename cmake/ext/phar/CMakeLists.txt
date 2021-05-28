@@ -22,4 +22,4 @@ endif(NOT EXT_PHAR_CHECK)
 
 file(GLOB EXT_PHAR_SOURCES *.c)
 
-add_library(EXT_PHAR ${EXT_PHAR_SOURCES} ${RE2C_phar_path_check_OUTPUT})
+add_library(EXT_PHAR ${EXT_PHAR_SOURCES} ${PHP_SOURCE_DIR}/ext/phar/${RE2C_phar_path_check_OUTPUT})

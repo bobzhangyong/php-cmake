@@ -25,9 +25,6 @@ macro(PHP_INTERNAL_FUNCTIONS exts_list exts_cli_list target)
 	# 2. call to genif.sh
 	execute_process(COMMAND "sh" "${PHP_SOURCE_DIR}/build/genif.sh"
 					"${PHP_SOURCE_DIR}/main/internal_functions.c.in"
-					"${PHP_SOURCE_DIR}"
-					""
-					"gawk"
 					${exts_list}
 #					WORKING_DIRECTORY ${PHP_SOURCE_DIR}
 					OUTPUT_FILE ${target}

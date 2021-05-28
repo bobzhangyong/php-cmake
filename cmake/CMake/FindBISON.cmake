@@ -133,15 +133,23 @@ IF(BISON_EXECUTABLE)
 
 #            STRING(REPLACE ";" " " BISON_TARGET_cmdopt ${BISON_TARGET_cmdopt})
 
+            # in json do not need set -p ${Name}
+            IF(DEFINED BISON_${Name}_SET_PARAM_P)
+                ADD_CUSTOM_COMMAND(OUTPUT ${BISON_TARGET_outputs}
+                        ${BISON_TARGET_extraoutputs}
+                        COMMAND ${BISON_EXECUTABLE} ${BISON_TARGET_cmdopt} ${ARGV1} -o ${ARGV2}
+                        DEPENDS ${ARGV1}
+                        COMMENT "[BISON][${Name}] Building parser with bison ${BISON_VERSION}"
+                        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
-            ADD_CUSTOM_COMMAND(OUTPUT ${BISON_TARGET_outputs}
-                    ${BISON_TARGET_extraoutputs}
-                    COMMAND ${BISON_EXECUTABLE} -p ${Name} ${BISON_TARGET_cmdopt} ${ARGV1} -o ${ARGV2}
-                    DEPENDS ${ARGV1}
-                    COMMENT "[BISON][${Name}] Building parser with bison ${BISON_VERSION}"
-                    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
-
-
+            ELSE(DEFINED BISON_${Name}_SET_PARAM_P)
+                ADD_CUSTOM_COMMAND(OUTPUT ${BISON_TARGET_outputs}
+                        ${BISON_TARGET_extraoutputs}
+                        COMMAND ${BISON_EXECUTABLE} -p ${Name} ${BISON_TARGET_cmdopt} ${ARGV1} -o ${ARGV2}
+                        DEPENDS ${ARGV1}
+                        COMMENT "[BISON][${Name}] Building parser with bison ${BISON_VERSION}"
+                        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+            ENDIF(DEFINED BISON_${Name}_SET_PARAM_P)
 
             # define target variables
             SET(BISON_${Name}_DEFINED TRUE)
@@ -152,7 +160,6 @@ IF(BISON_EXECUTABLE)
 
         ENDIF(NOT ${ARGC} EQUAL 3 AND NOT ${ARGC} EQUAL 5 AND NOT ${ARGC} EQUAL 7)
     ENDMACRO(BISON_TARGET)
-
 ENDIF(BISON_EXECUTABLE)
 
 
