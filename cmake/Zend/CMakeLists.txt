@@ -44,17 +44,16 @@ if(RE2C_FOUND)
 endif(RE2C_FOUND)
 
 # Language parser/scanner rules
-find_file(ZEND_LANGUAGE_SCANNER NAMES "zend_language_scanner.c" "zend_language_scanner.h" PATHS ${Zend_SOURCE_DIR})
+find_file(ZEND_LANGUAGE_SCANNER "zend_language_scanner.c" PATHS ${Zend_SOURCE_DIR})
 
 if(NOT ZEND_LANGUAGE_SCANNER AND NOT RE2C_FOUND)
   message(FATAL_ERROR "You need r2c to regenerate zend_language_scanner.c")
 endif(NOT ZEND_LANGUAGE_SCANNER AND NOT RE2C_FOUND)
 
 if(NOT ZEND_LANGUAGE_SCANNER)
-  message("Regenerating zend_language_scanner")
-  RE2C_TARGET(${Zend_SOURCE_DIR}/zend_language_scanner.l ${Zend_SOURCE_DIR}/zend_language_scanner.c "--case-inverted -cbdFt ${Zend_SOURCE_DIR}/zend_language_scanner_defs.h")
+    message("Regenerating zend_language_scanner")
+    RE2C_TARGET(language_scanner Zend/zend_language_scanner.l Zend/zend_language_scanner.c ${PHP_SOURCE_DIR} --case-inverted -cbdFt Zend/zend_language_scanner_defs.h)
 endif(NOT ZEND_LANGUAGE_SCANNER)
-
 
 ## Regenerate always ? some options force ?
 if(NOT EXISTS "zend_language_parser.c" OR NOT EXISTS "zend_language_parser.h" AND NOT BISON_FOUND)
@@ -76,8 +75,8 @@ endif (BISON_FOUND)
 
 find_file(ZEND_INI_SCANNER "zend_ini_scanner.c" PATHS ${Zend_SOURCE_DIR})
 if(NOT ZEND_INI_SCANNER)
-  message("Regenerating zend_ini_scanner")
-  RE2C_TARGET(${Zend_SOURCE_DIR}/zend_ini_scanner.l ${Zend_SOURCE_DIR}/zend_ini_scanner.c "--case-inverted -cbdFt ${Zend_SOURCE_DIR}/zend_ini_scanner_defs.h")
+    message("Regenerating zend_ini_scanner")
+    RE2C_TARGET(ini_scanner Zend/zend_ini_scanner.l Zend/zend_ini_scanner.c ${PHP_SOURCE_DIR} --case-inverted -cbdFt Zend/zend_ini_scanner_defs.h)
 endif(NOT ZEND_INI_SCANNER)
 
 #set(PHP_ZEND_OBJECTS ${Zend_BINARY_DIR}/CMakeFiles/Zend.dir/zend_ini_parser.o ${Zend_BINARY_DIR}/CMakeFiles/Zend.dir/zend_default_classes.o PARENT_SCOPE)
@@ -96,7 +95,7 @@ file(GLOB Zend_library_SRCS "${Zend_SOURCE_DIR}/*.c")
 file(GLOB Zend_library_HDRS "${Zend_SOURCE_DIR}/*.h")
 
 # actual target:
-add_library(Zend ${Zend_library_SRCS} ${Zend_library_HDRS} ${BISON_zend_OUTPUTS} ${BISON_ini__OUTPUTS})
+add_library(Zend ${Zend_library_SRCS} ${Zend_library_HDRS} ${BISON_zend_OUTPUTS} ${BISON_ini__OUTPUTS} ${RE2C_language_scanner_OUTPUT} ${RE2C_ini_scanner_OUTPUT} )
 set_target_properties(Zend PROPERTIES VERSION 0.0.0)
 
 # add install target:

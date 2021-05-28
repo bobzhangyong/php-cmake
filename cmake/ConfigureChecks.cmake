@@ -252,6 +252,7 @@ set(HAVE_SYMLINK 1)
 set(HAVE_CRYPT 1)
 set(HAVE_CTYPE 1)
 set(HAVE_HTONL 1)
+set(PCRE2_CODE_UNIT_WIDTH 1)
 
 
 check_function_exists(chroot ENABLE_CHROOT_FUNC)

@@ -2191,6 +2191,8 @@ libraries */
 /* Define to the version of this package. */
 #cmakedefine PACKAGE_VERSION 1
 
+#cmakedefine PCRE2_CODE_UNIT_WIDTH 8
+
 /* */
 #cmakedefine PDO_MYSQL_UNIX_ADDR 1
 

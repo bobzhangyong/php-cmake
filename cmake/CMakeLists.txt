@@ -38,7 +38,6 @@ include(ConfigureFileIn)
 # Constants setting
 # Version setting
 include(php/PHP_Version)
-configure_file_in(php_version.h.cmake php_version.h DIRECTORY main)
 
 message("START cmaking of PHP ${PHP_VERSION}")
 
