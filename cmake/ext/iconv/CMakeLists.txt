@@ -36,8 +36,8 @@ set(EXT_ICONV_SOURCES
 )
 
 #add_library(EXT_XML [STATIC | SHARED | MODULE] [EXCLUDE_FROM_ALL]
-add_library(EXT_ICONV ${EXT_ICONV_SOURCES})
-if(ICONV_FOUND)
-  target_link_libraries(EXT_ICONV ${ICONV_LIBRARY})
-endif(ICONV_FOUND)
+add_library(EXT_ICONV OBJECT ${EXT_ICONV_SOURCES})
+#if(ICONV_FOUND)
+#  target_link_libraries(EXT_ICONV ${ICONV_LIBRARY})
+#endif(ICONV_FOUND)
 

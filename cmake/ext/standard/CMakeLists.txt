@@ -46,8 +46,9 @@ if(NOT EXT_URL_SCANNER)
 endif(NOT EXT_URL_SCANNER)
 
 
-add_library(EXT_STANDARD ${EXT_STANDARD_SOURCES} ${EXT_STANDARD_HEADERS} ${PHP_SOURCE_DIR}/ext/standard/${RE2C_var_unserializer_OUTPUT} ${PHP_SOURCE_DIR}/ext/standard/${RE2C_url_scanner_ex_OUTPUT} )
+#add_library(EXT_STANDARD OBJECT ${EXT_STANDARD_SOURCES} ${EXT_STANDARD_HEADERS} ${PHP_SOURCE_DIR}/ext/standard/${RE2C_var_unserializer_OUTPUT} ${PHP_SOURCE_DIR}/ext/standard/${RE2C_url_scanner_ex_OUTPUT} )
+add_library(EXT_STANDARD OBJECT ${EXT_STANDARD_SOURCES} ${EXT_STANDARD_HEADERS} ${RE2C_var_unserializer_OUTPUT} ${RE2C_url_scanner_ex_OUTPUT})
 #add_library(EXT_STANDARD ${EXT_STANDARD_SOURCES} ${EXT_STANDARD_HEADERS})
-target_link_libraries(EXT_STANDARD "resolv")
-target_link_libraries(EXT_STANDARD "dl")
-target_link_libraries(EXT_STANDARD "m")
+#target_link_libraries(EXT_STANDARD "resolv")
+#target_link_libraries(EXT_STANDARD "dl")
+#target_link_libraries(EXT_STANDARD "m")

@@ -18,8 +18,9 @@ list(REMOVE_ITEM sapi_cli_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/cli_win32.c)
 #link_directories(${EXTENSION_LIST})
 
 #add_library(SAPI_CLI php_cli.c php_cli_process_title.c php_cli_server.c php_http_parser.c ps_title.c)
-
 add_executable(php php_cli.c php_cli_process_title.c php_cli_server.c php_http_parser.c ps_title.c)
-target_link_libraries(php main_cli ${EXTENSION_LIST} main TSRM Zend ${PHP_ZEND_LIBRARIES} ${PHP_ZEND_OBJECTS})
+
+#target_link_libraries(php  main_cli ${EXTENSION_LIST} main TSRM Zend ${PHP_ZEND_LIBRARIES} ${PHP_ZEND_OBJECTS})
+target_link_libraries(php  MainAndExt TSRM Zend ${PHP_ZEND_LIBRARIES} ${PHP_ZEND_OBJECTS})
 #target_link_libraries(php ${EXTENSION_LIST} main Zend)
 #target_link_libraries(php Zend main TSRM ${EXTENSION_LIST} ${PHP_ZEND_LIBRARIES} ${PHP_ZEND_OBJECTS})

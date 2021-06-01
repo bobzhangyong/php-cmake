@@ -24,5 +24,6 @@ endif(NOT PDO_SQL_PARSER)
 file(GLOB EXT_PDO_SOURCES *.c)
 
 #add_library(EXT_XML [STATIC | SHARED | MODULE] [EXCLUDE_FROM_ALL]
-add_library(EXT_PDO ${EXT_PDO_SOURCES} ${PHP_SOURCE_DIR}/ext/pdo/${RE2C_pdo_sql_parser_OUTPUT})
+#add_library(EXT_PDO ${EXT_PDO_SOURCES} ${PHP_SOURCE_DIR}/ext/pdo/${RE2C_pdo_sql_parser_OUTPUT})
+add_library(EXT_PDO OBJECT ${EXT_PDO_SOURCES} ${RE2C_pdo_sql_parser_OUTPUT})
 ##target_link_libraries(EXT_PDO ${@@EXTENSION_LIBRARIES@@})

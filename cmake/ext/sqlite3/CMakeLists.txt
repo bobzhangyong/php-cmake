@@ -16,9 +16,9 @@ option(sqlite3-shared "Shared sqlite3" OFF)
 #set(EXT_SQLITE3_SOURCES
 #  sqlite3.c ${sqlite3_extra_sources}
 #)
-file(GLOB EXT_SQLITE3_SOURCES *.c *.re)
+file(GLOB EXT_SQLITE3_SOURCES *.c)
 
 #add_library(EXT_XML [STATIC | SHARED | MODULE] [EXCLUDE_FROM_ALL]
-add_library(EXT_SQLITE3 ${EXT_SQLITE3_SOURCES})
-target_link_libraries(EXT_SQLITE3 "pthread")
+add_library(EXT_SQLITE3 OBJECT ${EXT_SQLITE3_SOURCES})
+
 ##target_link_libraries(EXT_SQLITE3 ${@@EXTENSION_LIBRARIES@@})

@@ -30,7 +30,7 @@ set(PHP_main_LIBRARIES)
 PHP_INTERNAL_FUNCTIONS("${EXTENSION_FOR_GENIF}" "${EXTENSION_FOR_GENIF}" ${CMAKE_CURRENT_SOURCE_DIR}/internal_functions.c)
 PHP_INTERNAL_FUNCTIONS("${EXTENSION_FOR_GENIF}" "${EXTENSION_FOR_GENIF}" ${CMAKE_CURRENT_SOURCE_DIR}/internal_functions_cli.c)
 
-configure_file(internal_functions.c.in ${CMAKE_CURRENT_SOURCE_DIR}/internal_functions.c)
+#configure_file(internal_functions.c.in ${CMAKE_CURRENT_SOURCE_DIR}/internal_functions.c)
 
 # ########## main library ##########
 # Sources:
@@ -39,22 +39,22 @@ file(GLOB main_library_SRCS *.c streams/*.c)
 list(REMOVE_ITEM main_library_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/internal_functions_nw.c)
 list(REMOVE_ITEM main_library_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/internal_functions_win32.c)
 list(REMOVE_ITEM main_library_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/internal_functions_cli.c)
+list(REMOVE_ITEM main_library_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/internal_functions.c)
 
 # Headers:
 file(GLOB main_library_HDRS *.h streams/*.h)
 
 # actual target:
-add_library(main ${main_library_SRCS} ${main_library_HDRS})
+add_library(main OBJECT ${main_library_SRCS} ${main_library_HDRS})
 set_target_properties(main
         PROPERTIES COMPILE_FLAGS "-DZEND_ENABLE_STATIC_TSRMLS_CACHE=1"
         )
-set_target_properties(main PROPERTIES VERSION 0.0.0)
 
 file(GLOB main_cli_SRCS internal_functions_cli.c)
-add_library(main_cli ${main_cli_SRCS})
+add_library(main_cli OBJECT ${main_cli_SRCS})
 set_target_properties(main_cli
         PROPERTIES COMPILE_FLAGS "-DZEND_ENABLE_STATIC_TSRMLS_CACHE=1"
         )
 
-# add install target:
-install(TARGETS main DESTINATION lib)
+## add install target:
+#install(TARGETS main DESTINATION lib)

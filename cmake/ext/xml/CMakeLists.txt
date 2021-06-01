@@ -14,4 +14,4 @@ option(xml-shared "Shared hash" OFF)
 
 set(EXT_XML_SOURCES compat.c xml.c expat_compat.h)
 
-add_library(EXT_XML ${EXT_XML_SOURCES})
+add_library(EXT_XML OBJECT ${EXT_XML_SOURCES})

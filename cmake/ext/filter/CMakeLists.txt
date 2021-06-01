@@ -17,6 +17,6 @@ set(EXT_FILTER_SOURCES
 )
 
 #add_library(EXT_XML [STATIC | SHARED | MODULE] [EXCLUDE_FROM_ALL]
-add_library(EXT_FILTER ${EXT_FILTER_SOURCES})
+add_library(EXT_FILTER OBJECT ${EXT_FILTER_SOURCES})
 ##target_link_libraries(EXT_FILTER ${@@EXTENSION_LIBRARIES@@})
-target_link_libraries(EXT_FILTER EXT_PCRE)
+#target_link_libraries(EXT_FILTER EXT_PCRE)

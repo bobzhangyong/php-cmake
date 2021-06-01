@@ -25,7 +25,7 @@ file(GLOB PCRELIB_SOURCES pcre2lib/pcre2_auto_possess.c pcre2lib/pcre2_chartable
 set(EXT_PCRE_SOURCES php_pcre.c)
 
 #add_library(EXT_XML [STATIC | SHARED | MODULE] [EXCLUDE_FROM_ALL]
-add_library(EXT_PCRE STATIC ${PCRELIB_SOURCES} ${EXT_PCRE_SOURCES})
+add_library(EXT_PCRE OBJECT ${PCRELIB_SOURCES} ${EXT_PCRE_SOURCES})
 set_target_properties(EXT_PCRE
         PROPERTIES COMPILE_FLAGS "-DHAVE_CONFIG_H -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1"
         )

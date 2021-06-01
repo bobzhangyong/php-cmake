@@ -31,5 +31,5 @@ file(GLOB EXT_JSON_SOURCES *.c)
 file(GLOB EXT_JSON_HEADER *.h)
 
 #add_library(EXT_XML [STATIC | SHARED | MODULE] [EXCLUDE_FROM_ALL]
-add_library(EXT_JSON ${EXT_JSON_SOURCES} ${EXT_JSON_HEADER} ${PHP_SOURCE_DIR}/ext/json/${RE2C_json_scanner_OUTPUT} ${BISON_json_parser_OUTPUTS})
+add_library(EXT_JSON OBJECT ${EXT_JSON_SOURCES} ${EXT_JSON_HEADER} ${PHP_SOURCE_DIR}/ext/json/${RE2C_json_scanner_OUTPUT} ${BISON_json_parser_OUTPUTS})
 ##target_link_libraries(EXT_JSON ${@@EXTENSION_LIBRARIES@@})

@@ -26,5 +26,5 @@ set(EXT_DOM_SOURCES
 )
 
 #add_library(EXT_XML [STATIC | SHARED | MODULE] [EXCLUDE_FROM_ALL]
-add_library(EXT_DOM ${EXT_DOM_SOURCES})
+add_library(EXT_DOM OBJECT ${EXT_DOM_SOURCES})
 ##target_link_libraries(EXT_DOM ${@@EXTENSION_LIBRARIES@@})
